@@ -1,0 +1,53 @@
+<!DOCTYPE html> <!-- HTML5 doctype declaration -->
+<html lang="en"> <!-- Document language set to English -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport settings -->
+    <title>Login Page</title> <!-- Title of the page -->
+    <!-- Fonts preconnect and link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav style="font-size: 20px; text-align: center;">
+        <a href="/">Home</a>
+        <a href="login">Login</a>
+        <a href="reset">Reset Password</a>
+        <a href="signup">Sign Up</a>
+        <a href="sendEmail">Email Reset</a>
+    </nav>
+
+    <div class="cmiddle"> <!-- Main content container -->
+        <!-- Text elements with styling -->
+        <p class="singup-top-text" style="margin-bottom: -10px;">Hyperelastic Model</p>
+        <p class="singup-top-text" style="margin-bottom: 45px">Fitting Toolbox</p>
+        <h2 class="welcome-message" style="margin-bottom: -12px">WELCOME BACK</h2>
+        <!-- Signup message with link -->
+        <p class="new-here"> New here?
+            <a href="signup" class="signup-style">Sign Up</a>
+        </p>
+
+        <!-- Login form -->
+        <form class="login-form">
+            <!-- Input fields for email and password -->
+            <div class="input-container">
+                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email">
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="Password" required />
+            </div>
+            <!-- Forgot password link -->
+            <a href="sendEmail" class="signup-style">I forgot my password</a>
+            <!-- Submit button -->
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

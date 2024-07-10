@@ -1,0 +1,888 @@
+/*
+COLOR PALLETE
+#4ec0ff
+#09a5e3
+#5e5e5e 
+#1b1b1b
+#ff9384
+#622f28
+*/
+
+/* for setting up two sides of each slide the a side is the left content and b is right content  */
+#grid {
+
+  position: relative;
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+
+  display: var(--grid);
+  grid-template-columns: 200px 200px;
+  grid-auto-rows: 200px 200px;
+  grid-template-areas:
+    "a b"
+    "a b"; 
+}
+
+#b {
+  padding: 10px 40px 0px 60px;
+}
+
+#a {
+  padding: 10px 40px 0px 60px;
+}
+
+:root {
+  background-color: #f0f0f0;
+  font-family: "montserrat";
+}
+
+body {
+  font-family: "archivo black";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+body p {
+  font-family: "montserrat";
+  color: #09a5e3;
+  font-size: 20px;
+}
+
+h1,
+h2 {
+  font-family: "archivo black";
+}
+
+/*styling for buttons*/
+.bluebutton {
+  /* width: 145px;
+  height: 50px; */
+  border: none;
+  background-color: #09a5e3;
+  color: #1b1b1b;
+  font-family: "archivo black";
+  font-size: 20px;
+  padding: 12px 35px;
+  border-radius: 23px;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+label {
+  margin-right: 2.5em;
+  margin-left: -2em;
+}
+
+label:hover {
+  background-color: #4ec0ff;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+button:hover {
+  background: #4ec0ff;
+}
+
+
+/* creates a box for the area where the graph is displayed*/
+.graph {
+  width: 500px;
+  height: 400px;
+  border-color: #1b1b1b;
+  border-style: solid;
+  border-width: 3px;
+}
+
+
+
+/* dropdown button----------------------------------------------------------------*/
+.dropdown {
+  min-width: 15em;
+  position: relative;
+  margin: 2em;
+  
+}
+
+.dropdown * {
+  box-sizing: border-box;
+}
+
+.select {
+  width: 145px;
+  height: 50px;
+  border: none;
+  background-color: #09a5e3;
+  color: #1b1b1b;
+  font-family: "montserrat";
+  font-size: 15px;
+  border-radius: 23px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  transition: background 0.3s;
+  
+}
+
+.select:hover {
+  background: #4ec0ff;
+}
+
+.dropdown p {
+  inline-size: 100px;
+  text-overflow: ellipsis;
+}
+
+
+
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 13px solid#1b1b1b;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.caret-rotate {
+  transform: rotate(180deg);
+}
+
+.menu {
+  list-style: none;
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em;
+  color: #09a5e3;
+  font-family: "montserrat";
+  font-size: 11px;
+  transform: translateX(-50%);
+  opacity: 0;
+  display: none;
+  position: absolute;
+  top: 3em;
+  left: 25%;
+  width: 145px;
+  height: 80px;
+  margin: 20px;
+
+  overflow-y: auto;
+}
+
+.menu,
+li,
+ul {
+  z-index: 1000;
+}
+
+.menu li {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background: #e4e6eb;
+}
+
+.menu-open {
+  display: block;
+  opacity: 1;
+}
+
+.active {
+  background: #e4e6eb;
+ 
+}
+
+/*dropdown styling specific to the select model dropdown*/
+#modelselect {
+  width: 325px;
+}
+
+#modelmenu {
+  left:60%;
+  height: 160px;
+  width: 229px;
+}
+
+
+/* dropdown button----------------------------------------------------------------*/
+
+.uploadslide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.verifyslide #a {
+  padding: 10px 40px 0px 60px;
+}
+
+ul li {
+  margin-bottom: 2em;
+}
+
+.verifyslide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.verifyslide #b p
+{
+  padding:0px;
+  margin: 0px;
+}
+
+
+#modelBox {
+
+  width: 500px;
+  justify-content: left;
+
+  font-family: "montserrat";
+  font-size: 15px;
+}
+
+#argumentBox {
+  font-family: "montserrat";
+  width: 500px;
+  justify-content: left;
+}
+
+#paramBox {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+/* circle that is hovered for information*/
+
+#infobubble {
+  position: absolute;
+  cursor: pointer;
+  font-size: 15px;
+  color: #ffffff;
+  font-family: "Times New Roman";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #09a5e3;
+  margin-left: 100px;
+  left: 67%;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* what happens when the infobubble is hovered*/
+#infobubble:hover #textbubble {
+  top: -130%;
+  visibility: visible;
+  opacity: 1;
+  z-index: 2000;
+}
+
+
+/* what the information looks like*/
+#textbubble {
+  position: absolute;
+  left: 15%;
+  top: 0;
+  background-color: #e4e6eb;
+  color: #5e5e5e;
+  border-radius: 0.5em;
+  padding: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  width: 300px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+
+.seedataslide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+.seedataslide #b p {
+  writing-mode: vertical-lr;
+  text-orientation: sideways-right;
+}
+
+.seedataslide #a {
+  align-items: left;
+  text-align: left;
+}
+.datalabels {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.datalabels p {
+  font-size: 12px;
+}
+
+.datalabels h4 {
+  color: #09a5e3;
+  font-family: "montserrat";
+  font-weight: normal;
+}
+
+.dataSection {
+  margin-left: 50px;
+}
+
+.paramValues {
+  padding: 1px 0 1px 0;
+}
+
+.datavalues {
+  padding-bottom: 12px;
+}
+
+
+
+/* ---------------------------------carousel------------------------------------------------ */
+
+
+
+.carousel {
+  position: relative;
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #4ec0ff;
+  border-radius: 30px;
+}
+
+.carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.carousel__track-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  height: 100%;
+}
+
+.carousel__slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carousel__slide #a {
+  grid-area: a;
+  position: absolute;
+  right: 60%;
+}
+
+.carousel__slide #a li,
+p {
+  font-family: "montserrat";
+  color: #09a5e3;
+}
+
+.carousel__slide #b {
+  grid-area: a;
+  position: absolute;
+  left: 40%;
+}
+
+
+/* ------left and right buttons for navigating carousel----- */
+
+
+/* arrow shape*/
+.arrow { 
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-top: 4px solid #09a5e3;
+  border-left: 4px solid #09a5e3;
+  transform: rotate(-45deg);
+  margin-left: 5px;
+}
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  cursor: pointer;
+}
+
+.carousel__button--left {
+  border-radius: 0.5em;
+  left: -75px;
+  width:30px;
+  height:50px;
+  transform: translate(0, 0px);
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+}
+
+.carousel__button--left:hover {
+  background-color: transparent;
+}
+
+.carousel__button--right {
+  border-radius: 0.5em;
+  right: -80px;
+  transform: rotate(180deg);
+  width:30px;
+  height:50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.carousel__button--right:hover {
+  background-color: transparent;
+}
+/* ----------------------------------------------------------------- */
+
+
+
+/* --------tool indicator flow chart at bottom of page---------------*/
+.carousel__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.carousel__indicator {
+  width: 145px;
+  height: 50px;
+  border: none;
+  background-color: #09a5e3;
+  color: #ffffff;
+  font-family: "montserrat";
+  font-size: 11px;
+  padding: 12px 35px;
+  border-radius: 23px;
+}
+
+.carousel__indicator.current_slide
+{
+  width: 145px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  
+  box-shadow:
+  0 0 10px 2px #4ec0ff; /* outer */
+ 
+}
+
+.dots {
+  border: 0;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background: #4ec0ff;
+  margin: 0 4px;
+}
+
+/* ---------------------------------------------------------*/
+/* ---------------------------------------------------------*/
+
+/*alignment*/
+
+#inlignLabel-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inlignLabel-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+}
+
+#vertical-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----------------------------------------*/
+
+.argument-item li {
+  font-family: "montserrat";
+  font-size: 15px;
+}
+
+.argument-item p.code {
+  font-family: monospace;
+  font-size: 15px;
+  display: inline;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+.login-container {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  color: #333;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  padding: 1em;
+  margin: 0.5em;
+  border: 1px solid #09a5e3;
+  /* or #09a5e3 */
+  border-radius: 20px;
+}
+
+.login-form button {
+  width:60%;
+  padding: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-top: 3em;
+  background-color: #09a5e3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+.signup-style {
+  color: #09a5e3;
+  text-decoration: none;
+  text-align: center;
+}
+
+.new-here {
+  color: black;
+  text-align: center;
+}
+
+.singup-top-text {
+  text-align: center;
+  color: rgb(88, 88, 88);
+  font-size: 20px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* CSS for the input container */
+.input-container {
+  width: 25em;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-container input {
+  width: 100%;
+}
+
+/* CSS for the input icon */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  /* Adjust as needed */
+}
+
+/* CSS to style the icon image */
+.input-icon img {
+  width: 20px;
+  /* Adjust the size as needed */
+  height: auto;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+/* DELETE THIS LATER */
+
+/* Set Navigation bar color*/
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 10px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* Setup text in navigation bar */
+nav a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Setup color when mouse is over links */
+nav a:hover {
+  background-color: #ffffff;
+}
+
+.nav-name {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: white;
+  font-size: 24px;
+}
+
+.status-dropdown {
+  padding: 1em;
+  margin: 0.5em;
+  margin-bottom: -10px;
+  border: 1px solid #09a5e3;
+  /* or #09a5e3 */
+  border-radius: 20px;
+}
+
+
+
+
+
+.param-container h2 {
+  margin-left: 4%;
+  margin-top: 30px;
+ 
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-container div {
+  flex-basis: 45%; /* Adjust as needed to fit your layout */
+}
+
+.form-container label,
+.form-container input {
+  width: 50%;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input[type=submit] {
+  width: auto;
+  background-color: #4ec0ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+}
+
+.carousel__slide.main-content hr {
+  height: 2px;
+  width: 98%;
+  margin: 20px auto;
+  background-color: lightgray;
+  border: none;
+  margin-top: -20px;
+  margin-right: 25%;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+/* This is for my portion of the carousel SHIPLEY */
+.param-container {
+  width:100%;
+  margin-top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+}
+
+.column {
+  flex: 1;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.column:last-child {
+  margin-right: 0;
+}
+
+.param-values input[type="text"] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100px;
+    margin-bottom:25px;
+    height:20px;
+}
+
+.param_dropdown {
+  position: absolute;
+  bottom: 50px; /* Adjust the distance from the bottom as needed */
+  left: 50%; /* Position it in the center horizontally */
+  transform: translateX(-50%); /* Center it horizontally */
+}
+
+.param_dropdown * {
+  box-sizing: border-box;
+}
+
+.param_dropdown p {
+  inline-size: 100px;
+  text-overflow: ellipsis;
+}
+
+.param-spread {
+  font-family: "montserrat";
+  color: black;
+  font-size: 20px;
+  margin-top:0px;
+}
+
+.param-label {
+  font-family: "montserrat";
+  color: #09a5e3;
+  font-size: 20px;
+}
+
+.param-title {
+  margin-bottom: -4px;
+}
+
+.input {
+  padding: 20px;
+}
+
+.param-submit {
+  /* width: 145px;
+  height: 50px; */
+  position: absolute;
+  bottom: 50px;
+  left: 80px;
+}
+
+.param-note {
+  position: absolute;
+  bottom: -10px; /* Adjust the distance from the bottom as needed */
+  font-size: 22px; /* Adjust font size as needed */
+  right: 180px;
+}
+
+.param-note2 {
+  position: absolute;
+  bottom: 30px; /* Adjust the distance from the bottom as needed */
+  left: calc(50% + 100px); /* Adjust the distance from the left to align with the Optimizer button */
+  font-size: 20px; /* Adjust font size as needed */
+}
+
+.cmiddle {   /* Centers content vertically */                                      
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.rmiddle {  /* Centers content horizontally */                                         
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.param-values {
+  align-items: left;
+}
+
+.graphDownload {
+  margin-top: 1em;
+}
+
+.search input[type="text"] {
+  padding: 0.5em;
+  border: 1px solid #09a5e3;
+  border-radius: 6px;
+  width: 100%;
+  }

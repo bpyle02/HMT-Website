@@ -1,0 +1,80 @@
+<!DOCTYPE html> <!-- HTML5 doctype declaration -->
+<html lang="en"> <!-- Document language set to English -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport settings -->
+    <title>Login Page</title> <!-- Title of the page -->
+    <!-- Fonts preconnect and link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- JavaScript function to send email -->
+    <script>
+        function SendMail() {
+            var params  = {
+                email_id : document.getElementById("email_id").value,
+            }
+            // Change: Email Services, Email Templates, Params
+            emailjs.send("service_i6pxa19", "template_himuy4u", params).then(
+                (response) => {
+                  console.log('SUCCESS!', response.status, response.text);
+                },
+                (error) => {
+                  console.log('FAILED...', error);
+                },
+              );
+            }
+    </script>
+
+    <!-- EmailJS library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            // Change: Listed in dashboard account section as "Public Key"
+            publicKey: "5GH3TDff1D5K6JkB_",
+        });
+    })();
+    </script>
+</head>
+
+<body>
+
+    <nav style="font-size: 20px; text-align: center;">
+        <a href="/">Home</a>
+        <a href="login">Login</a>
+        <a href="reset">Reset Password</a>
+        <a href="signup">Sign Up</a>
+        <a href="sendEmail">Email Reset</a>
+    </nav>
+
+    <div class="cmiddle"> <!-- Main content container -->
+        <!-- Text elements with styling -->
+        <p class="singup-top-text" style="margin-bottom: -10px;">Hyperelastic Model</p>
+        <p class="singup-top-text" style="margin-bottom: 45px">Fitting Toolbox</p>
+        <h2 class="welcome-message" style="margin-bottom: -12px">Enter Email for Reset Link</h2> <!-- Reset password title -->
+        <!-- Login reminder with link -->
+        <p class="new-here"> Remember your Password?
+            <a href="login" class="signup-style">Login</a>
+        </p>
+
+        <!-- Email submission form -->
+        <form class="login-form" action="login">
+            <!-- Email input with lock icon -->
+            <div class="input-container">
+                <input type="email" id="email_id" placeholder="Email" required>
+                <span class="input-icon">
+                    <img src="https://cloud.brandonpyle.com/s/Himjsqt3WD95EZo/download/lock.png" alt="Lock Icon by Raj Dev">
+                </span>
+            </div>  
+            <!-- Submit button -->
+            <button type="submit" onclick="SendMail()">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

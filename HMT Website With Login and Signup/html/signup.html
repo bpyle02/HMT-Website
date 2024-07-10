@@ -1,0 +1,82 @@
+<!DOCTYPE html> <!-- HTML5 doctype declaration -->
+<html lang="en"> <!-- Document language set to English -->
+
+<head>
+    <meta charset="UTF-8" /> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive viewport settings -->
+    <title>HMT | Sign Up</title> <!-- Title of the page -->
+    <!-- Fonts preconnect and link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+    <nav style="font-size: 20px; text-align: center;">
+        <a href="/">Home</a>
+        <a href="login">Login</a>
+        <a href="reset">Reset Password</a>
+        <a href="signup">Sign Up</a>
+        <a href="sendEmail">Email Reset</a>
+    </nav>
+
+    <div> <!-- Main content container -->
+        <!-- Text elements with styling -->
+        <p class="singup-top-text" style="margin-bottom: -10px">
+            Hyperelastic Model
+        </p>
+        <p class="singup-top-text" style="margin-bottom: 40px">Fitting Toolbox</p>
+        <h2 style="text-align: center">SIGN UP</h2> <!-- Sign up title -->
+        <!-- Sign up form -->
+        <form class="login-form">
+            <!-- First and last name inputs -->
+            <div class="name-inputs">
+                <input type="text" name="first_name" id="first_name" placeholder="First Name" required autocomplete="given-name">
+                <input type="text" name="last_name" id="last_name" placeholder="Last Name" required autocomplete="family-name">
+            </div>
+            <!-- Email input -->
+            <input type="email" name="email" id="email" placeholder="Email" required autocomplete="email">
+            <!-- Password inputs -->
+            <div class="name-inputs">
+                <input type="password" name="password" placeholder="Password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Password must have one number, uppercase, and lowercase letter and be 8 or more characters.' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
+                    required />
+                <input type="password" name="password_repeat" placeholder="Repeat Password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                    required />
+            </div>
+            <!-- Status dropdown -->
+            <select name="status" id="status" class="status-dropdown" required autocomplete="status">
+                <option value="None">None</option>
+                <option value="Undergrad Student">Undergrad Student</option>
+                <option value="Graduate Student">Graduate Student</option>
+                <option value="Employer">Employer</option>
+                <option value="Employee">Employee</option>
+            </select>
+            <!-- Sign up button -->
+            <button type="submit" class="signup-button">Sign Up</button>
+            <!-- Login reminder with link -->
+            <p class="new-here">
+                Got an account?
+                <a href="login" class="signup-style">Log In</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- JavaScript to redirect to login page on form submission -->
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+            // Redirect to login.html
+            window.location.href = 'login';
+        });
+    </script>
+</body>
+
+</html>

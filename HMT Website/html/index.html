@@ -1,0 +1,314 @@
+<!DOCTYPE html> <!-- HTML5 doctype declaration -->
+<html lang="en"> <!-- Document language set to English -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport settings -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- Browser compatibility -->
+    <title>Document</title> <!-- Title of the page -->
+    <!-- Fonts preconnect and link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- JavaScript libraries -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+    <div class="carousel"> <!-- Main carousel container -->
+        <!-- Left navigation button -->
+        <button class="carousel__button carousel__button--left">
+            <div class="arrow"></div>
+        </button>
+        <div class="carousel__track-container"> <!-- Carousel track container -->
+            <ul class="carousel__track"> <!-- Carousel slides container -->
+                <li class="carousel__slide current-slide"> <!-- Slide 1: Upload slide -->
+                    <div class="uploadslide">
+                        <div id="a">
+                            <h2>UPLOAD UNIAXIAL TEST DATA</h2> <!-- Upload title -->
+                            <!-- Upload form -->
+                            <div id="inlignLabel-item">
+                                <form id="csvUpload" action="/upload" method="POST" enctype="multipart/form-data">
+                                    <!-- File input -->
+                                    <label class="bluebutton">
+                                        <input type="file" name="file" id="fileInput" accept="text/csv">
+                                        Choose File
+                                    </label>
+                                    <!-- Upload button -->
+                                    <button class="bluebutton" type="submit">Upload</button>
+                                </form>
+                            </div>
+                            <!-- Dropdowns for stress and stretch columns -->
+                            <div id="inlignLabel-item">
+                                <!-- Stress column dropdown -->
+                                <p>Stress Column</p>
+                                <div class="dropdown">
+                                    <!-- Selected option -->
+                                    <div class="select">
+                                        <span class="selected" id="stress_col">Stress</span>
+                                        <div class="caret"></div>
+                                    </div>
+                                    <!-- Dropdown menu -->
+                                    <ul class="menu">
+                                        <li>Stretch</li>
+                                        <li>Stress</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Stretch column dropdown -->
+                            <div id="inlignLabel-item">
+                                <p>Stretch Column</p>
+                                <div class="dropdown">
+                                    <div class="select">
+                                        <span class="selected" id="stretch_col">Stretch</span>
+                                        <div class="caret"></div>
+                                    </div>
+                                    <ul class="menu">
+                                        <li>Stretch</li>
+                                        <li>Stress</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Stress label dropdown -->
+                            <div id="inlignLabel-item">
+                                <p>Stress Label</p>
+                                <div class="dropdown">
+                                    <div class="select">
+                                        <span class="selected" id="stress_label">kgf/cm^2</span>
+                                        <div class="caret"></div>
+                                    </div>
+                                    <ul class="menu">
+                                        <li>MPa</li>
+                                        <li>kPA</li>
+                                        <li>Pa</li>
+                                        <li>kgf/cm^2</li>
+                                        <li>lbf/inch^2</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Verification plot -->
+                        <div id="b" class="cmiddle">
+                            <h2>VERIFICATION PLOT</h2> <!-- Verification plot title -->
+                            <!-- Graph container -->
+                            <div id="inlignLabel-item">
+                                <div class="graph">
+                                    <canvas class="canvas" id="chart" width="500" height="400"></canvas> <!-- Chart.js canvas -->
+                                </div>
+                            </div>
+                            <!-- Download graph button -->
+                            <button onclick="downloadChart('chart')" class="bluebutton graphDownload">Download Graph</button>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Additional slides -->
+                <!-- Slide 2: Model selection -->
+                <li class="carousel__slide">
+                    <div class="verifyslide">
+                        <div id="a">
+                            <h2>SELECT HYPERELASTIC MODEL</h2>
+                            <ul>
+                                <li>When selecting a phenomenological
+                                    model, be aware that using higher
+                                    order models may result in overfitting
+                                    of the data
+                                </li>
+                                <li>All moduli in models are in the stress units defined
+                                    previously
+                                </li>
+                                <li>
+                                    The model selection may take a couple
+                                    seconds to load
+                                </li>
+                            </ul>
+
+                            <div id="inlignLabel-item">
+                                <div class="dropdown">
+                                    <div class="select" id="modelselect">
+                                        <span class="selected" id="hyperelastic-model">Select Model</span>
+                                        <div class="caret"></div>
+                                    </div>
+                                    <ul class="menu" id="modelmenu">
+                                        <input type="text" id="modelSearch" placeholder="Search Models">
+                                        {{{hyperelastic_models}}}
+                                    </ul>
+                                </div>
+                            
+                                <div id="infobubble">
+                                    <span id="textbubble">No model selected.</span>
+                                    <span>i</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="b">
+                            <h2>YOUR MODEL INFORMATION</h2>
+                            <p>Model:</p>
+                            <div class="math" id="modelBox"></div>
+                            <p>Arguments:</p>
+                            <div><ul id="argumentBox"></ul></div>
+                            <p>Parameters:</p>
+                            <div id="param-modelcontent"><ul id="paramBox"></ul></div>
+                        </div>
+
+                    </div>
+
+                </li>
+
+                <!-- Slide 3: Initial parameter guess -->
+                <li class="carousel__slide">
+                    <div class="param-container">
+                        <h2>SET INITIAL PARAMETER GUESS</h2>
+                        <div class="form-row">
+                            <div class="column">
+                                <p class="param-label param-title">Parameter</p>
+                                <div id ="paramBox2">
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <p class="param-label">Lower Bound</p>
+                                <span id="lowerBoundsBox">
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                </span>
+                            </div>
+                            <div class="column">
+                                <p class="param-label">Value</p>
+                                <div class="param-values" id="valueBox">
+                                    <input type='text' id='value1' name='value1'></input>
+                                    <input type='text' id='value2' name="value2"></input>
+                                    <input type='text' id='value3' name="value3"></input>
+                                    <input type='text' id='value4' name="value4"></input>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <p class="param-label">Upper Bound</p>
+                                <span id="upperBoundsBox">
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                    <p class='param-spread'> </p>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <button class="param-submit bluebutton" id="paramEntrySubmit" onclick="getParamGuesses();">Submit</button>
+                            <div class="param_dropdown">
+                                <div class="select">
+                                    <p class="param-note">Optimizer</p>
+                                    <span class="selected" id="optimizer">Select Optimizer</span>
+                                    <div class="caret"></div>
+                                </div>
+                                <ul class="menu">
+                                    <li>LBFGS</li>
+                                    <li>BFGS</li>
+                                    <li>NelderMead</li>
+                                </ul>
+                            </div>                                
+                            <p class="param-note2">
+                                If parameters are not converging, try using a
+                                <br style="line-height: 2;">
+                                different optimizer change the initial guess
+                            </p>                           
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Slide 4: Final Results -->
+                <li class="carousel__slide">
+                    <div class="seedataslide">
+                        <div id="a">
+                            <h2>FINAL PARAMETERS</h2>
+
+                            <div class ="datalabels">
+                                <div>
+                                    <h4>Param</h4>
+                                    <span id="final-param-container">
+                                        <p id="final-param" class ="paramValues">C00</p>
+                                        <p id="final-param" class ="paramValues">C00</p>
+                                        <p id="final-param" class ="paramValues">C00</p>
+                                        <p id="final-param" class ="paramValues">C00</p>
+                                    </span>
+                                </div>
+                                
+                                <div class="dataSection">
+                                    <h4>Initial</h4>
+                                    <span class="cmiddle" id="final-user">
+                                        <p class ="datavalues">0.0</p>
+                                        <p class ="datavalues">0.0</p>
+                                        <p class ="datavalues">0.0</p>
+                                        <p class ="datavalues">0.0</p>
+                                    </span>
+                                </div>
+                                
+                                <div class="dataSection cmiddle">
+                                    <h4>Optimized</h4>
+                                    <span class="cmiddle" id="final-optimized">
+                                        <p class = "datavalues">0.0</p>
+                                        <p class = "datavalues">0.0</p>
+                                        <p class = "datavalues">0.0</p>
+                                        <p class = "datavalues">0.0</p>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cmiddle" id="b">
+                            <div id="inlignLabel-item">
+                                <div class="graph">
+                                    <canvas class="canvas" id="chartFinal" width="500" height="400"></canvas>
+                                </div>
+                            </div>
+                            <button onclick="downloadChart('chartFinal')" class="bluebutton graphDownload">Download Graph</button>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Right navigation button -->
+        <button class="carousel__button carousel__button--right">
+            <div class="arrow"></div>
+        </button>
+
+        <!-- Carousel navigation indicators -->
+        <div class="carousel__nav">
+            <button class="carousel__indicator current_slide">Verify Upload</button>
+
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+
+            <button class="carousel__indicator">Select Model</button>
+
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+
+            <button class="carousel__indicator">Make Initial Guess</button>
+            
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+
+            <button class="carousel__indicator">See Data</button>
+        </div>
+    </div>
+</body>
+
+</html>
